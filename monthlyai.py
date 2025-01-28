@@ -1,4 +1,5 @@
 from openai import OpenAI
+import requests
 
 client = OpenAI()
 
@@ -14,4 +15,4 @@ completion = client.complete.create(
     ],
     
 )
-print(completion.choices[0].message)
+print(completion.choices[0].message.content)
