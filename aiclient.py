@@ -1,17 +1,16 @@
 from  openai import OpenAI
 
+email = "2025.kzheng@jburroughs.org"
 client = OpenAI()
 
-email = "2025.kzheng@jburroughs.org"
-
-completion = client.chat.completions.create(
+def hackedEmailPrompt(email):
+    completion = client.chat.completions.create(
     model="gpt-4o",
     messages=[
         {
             "role": "developer",
             "content": """You are writing an email to inform
             somebody that they were sent an email from a suspicious sender. 
-            
             """
         },
         {
@@ -21,5 +20,6 @@ completion = client.chat.completions.create(
             a suspicious email from {email}
             """
         }
-    ]
-)
+        ]
+    )
+    return completion
