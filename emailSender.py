@@ -12,7 +12,7 @@ app.config.update(
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
     MAIL_USERNAME='hackathontest619@gmail.com',
-    MAIL_PASSWORD='tcuj rdba zjxf vmju',
+    MAIL_PASSWORD='mkbm rnju hdhx ulyc',
     MAIL_DEFAULT_SENDER=('HackathonProject', 'hackathontest619@gmail.com')
 )
 
@@ -32,15 +32,6 @@ def send_email():
         )
         mail.send(msg)
         print("Email sent successfully!")
-
-        #ADDING AN IMAGE TO EMAIL
-        # Add the HTML body with the image URL
-        msg.html = """
-        <h1>Hello!</h1>
-        <p>This email contains an image from the internet:</p>
-        <img src="https://www.jburroughs.org/uploaded/themes/default_19/images/logo.svg" alt="Internet Image" style="width:300px;">
-        """
-
 
 send_email()
 
