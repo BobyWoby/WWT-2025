@@ -27,7 +27,7 @@ def send_email():
         print("in the app context")
         msg = Message(
             subject="Hello from Flask",
-            recipients=["ethanbc2020@icloud.com", "2027.sraheja@jburroughs.org", "2026.agoyal@jburroughs.org"],  # List of recipients
+            recipients=["ethanbc2020@icloud.com", "2027.sraheja@jburroughs.org"],  # List of recipients
             body="This is another test email sent from the Hackathon team."
         )
         mail.send(msg)
