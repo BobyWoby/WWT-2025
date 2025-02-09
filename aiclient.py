@@ -3,7 +3,7 @@ from  openai import OpenAI
 email = "2025.kzheng@jburroughs.org"
 client = OpenAI()
 
-def hackedEmailPrompt(email):
+def hackedEmailPrompt(email, recipient):
     completion = client.chat.completions.create(
     model="gpt-4o",
     messages=[
@@ -17,7 +17,7 @@ def hackedEmailPrompt(email):
             "role": "user",
             "content": f"""
             write an email that tells the user that they have received 
-            a suspicious email from {email}
+            a suspicious email from {email}, address the email to {recipient}, and have it be sent from the sAIf gmail add-on
             """
         }
         ]
