@@ -33,7 +33,7 @@ def send_email():
     
     recipient = data.get('recipient')
     subject = data.get("subject", "Default Subject")
-    body = data.get("body", "no body text provided")
+    #body = data.get("body", "no body text provided")
 
     if not recipient:
         return jsonify({"error": "recipient email is required"}),  400
@@ -42,7 +42,7 @@ def send_email():
     msg = Message(
         subject=subject,    #string for the header
         recipients=[recipient], #email adress array
-        body=hackedEmailPrompt(recipient) #this is where we'll add the AI generated message. It's just text.
+        body=hackedEmailPrompt(recipient) #function for the AI generated message. It's just text.
     )
     mail.send(msg)
 
