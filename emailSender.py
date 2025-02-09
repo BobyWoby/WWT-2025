@@ -3,6 +3,7 @@
 from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
+from aiclient import hackedEmailPrompt
 
 app = Flask(__name__)
 CORS(app)
@@ -41,7 +42,7 @@ def send_email():
     msg = Message(
         subject=subject,    #string for the header
         recipients=[recipient], #email adress array
-        body=body #this is where we'll add the AI generated message. It's just text.
+        body=hackedEmailPrompt(recipient) #this is where we'll add the AI generated message. It's just text.
     )
     mail.send(msg)
 
