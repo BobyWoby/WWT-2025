@@ -27,6 +27,9 @@ mail = Mail(app)
 @app.route('/send-email', methods=["POST"])
 def send_email():
     data = request.json
+    if not data:
+        return jsonify({"error": "Invalid or missing JSON data"}), 400
+    
     recipient = data.get('recipient')
     subject = data.get("subject", "Default Subject")
     body = data.get("body", "no body text provided")
@@ -34,17 +37,16 @@ def send_email():
     if not recipient:
         return jsonify({"error": "recipient email is required"}),  400
     
-        
-    with app.app_context():  # Ensure we're in the application context
-        print("in the app context")
-        msg = Message(
-            subject=subject,    #string for the header
-            recipients=[recipient], #email adress array
-            body=body #this is where we'll add the AI generated message. It's just text.
-        )
-        mail.send(msg)
+    print("sending email...")
+    msg = Message(
+        subject=subject,    #string for the header
+        recipients=[recipient], #email adress array
+        body=body #this is where we'll add the AI generated message. It's just text.
+    )
+    mail.send(msg)
 
-        return jsonify({"message": "Email sent."})
+    return jsonify({"message": "Email sent."})
 
 if __name__ == "__main__":
     app.run(debug=True)
+
