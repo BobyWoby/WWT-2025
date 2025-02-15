@@ -22,4 +22,5 @@ def hackedEmailPrompt(email, recipient):
         }
         ]
     )
-    return completion
+    return completion.choices[0].message;
+
