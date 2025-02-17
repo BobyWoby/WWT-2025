@@ -18,7 +18,7 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
-    MAIL_USERNAME='hackathontest619@gmail.com',
+    MAIL_USERNAME=os.getenv("MAIL_USERNAME"),
     MAIL_PASSWORD= os.getenv("MAIL_PASS"),
     MAIL_DEFAULT_SENDER=('Hackathon Project', 'hackathontest619@gmail.com')
 )
