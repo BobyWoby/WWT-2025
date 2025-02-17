@@ -4,6 +4,10 @@ from flask import Flask, request, jsonify
 from flask_mail import Mail, Message
 from flask_cors import CORS
 from aiclient import hackedEmailPrompt
+from dotenv import load_dotenv, dotenv_values
+import os
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
@@ -15,7 +19,7 @@ app.config.update(
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
     MAIL_USERNAME='hackathontest619@gmail.com',
-    MAIL_PASSWORD='mkbm rnju hdhx ulyc',
+    MAIL_PASSWORD= os.getenv("MAIL_PASS"),
     MAIL_DEFAULT_SENDER=('Hackathon Project', 'hackathontest619@gmail.com')
 )
 
@@ -33,21 +37,24 @@ def send_email():
     
     recipient = data.get('recipient')
     subject = data.get("subject", "Default Subject")
+    sender = data.get('sender')
     #body = data.get("body", "no body text provided")
 
     if not recipient:
         return jsonify({"error": "recipient email is required"}),  400
     
     print("sending email...")
+    message = hackedEmailPrompt(sender, recipient)
     msg = Message(
-        subject=subject,    #string for the header
+        subject="Suspicious Email Alert",    #string for the header
         recipients=[recipient], #email adress array
-        body=hackedEmailPrompt(recipient) #function for the AI generated message. It's just text.
+        body=message #function for the AI generated message. It's just text.
     )
     mail.send(msg)
-
-    return jsonify({"message": "Email sent."})
+    print("msg: " + message)
+    
+    return jsonify({"message": "Email sent."}), 200
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
 

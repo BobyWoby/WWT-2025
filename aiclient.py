@@ -16,11 +16,12 @@ def hackedEmailPrompt(email, recipient):
         {
             "role": "user",
             "content": f"""
-            write an email that tells the user that they have received 
-            a suspicious email from {email}, address the email to {recipient}, and have it be sent from the sAIf gmail add-on
+            write the body of an email that tells the user that they have received 
+            a suspicious email from {email}, address the email to {recipient}, and have it be sent from the sAIf team. Leave the subject line out of the response.
             """
         }
         ]
     )
-    return completion.choices[0].message;
+    #print(completion.choices[0].message)
+    return completion.choices[0].message.content
 
